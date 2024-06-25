@@ -1,7 +1,7 @@
 # STM32H7RSWorkShop-Debug authentication demo
 
 
-The example will guide you through a board provisionning with ST default secret, close the debug port of the  board. Then useing the debug authentication feature with certificate, you re-open the debugging link for debuging and also for triggering a regression  
+The example will guide you through a board provisionning with ST default credential, close the debug port of the board. Then using the debug authentication feature with certificate, we will re-open the debugging link for debuging and also for triggering a platform regression.  
 
 ## Prerequisites
 
@@ -21,17 +21,17 @@ The example will guide you through a board provisionning with ST default secret,
   ![Import project](./img/import_project.gif)
 ### Compile and download the project
 - Select the `Test_LED_Boot`
-- Go in Menu  `Run->Debug As-> 1 STM32C/C++ Application`
+- Go in Menu  `Run`->`Debug As`-> `1 STM32C/C++ Application`
 - Select debug configuration `Test_LED_Boot`, then `OK`
   ![Launch debug config](./img/compil_download.gif)
 - Run the application, then stop the debug session
   ![Run and stop](./img/launch_detach.gif)
-- LD2 orange is blinking 
+- LED LD2 orange is blinking 
 ## Step 2 : Provision the target with ST default credential and close the device
   ![Step 1 done ](./img/Step1_done.JPG)
-### 2.1 Let's provision the board !
+### Let's provision the board !
 - Launch STM32CubeProgrammer
-- Select connect mode `Hotplug`
+- Select connect mode `Hotplug`, this is a must !
 - Click on `Connect`
 - Select icon for the option byte `OB`
 - Select `Product State`
@@ -43,7 +43,7 @@ The example will guide you through a board provisionning with ST default secret,
 - On the Message pop-up "OBKey Provisioned successfully....", click `OK`
 - On the Message pop-up "Secure Option Byte set up succeeded", click `OK`
   ![Provision ](./img/provisionning.gif)
-### 2.2 Let's close the board !
+### Let's close the board !
 - Change product state value from `17` to `72`
 - Select  `Apply`
 - On the message pop-up : "Warning : Product state requested, verification could not be done", click `OK` 
@@ -62,13 +62,14 @@ The device is closed and our LED is blinking ! Device is ready to go on the fiel
 - Select `Test_LED_Boot_Return_from_the_field_analysis`
 - Select  `Debugger` tab
   ![Debug config ](./img/debug_config.gif)
-- In debug authentication update `Key path`, thanks `Browse...` to set it to your installation path
-- `...STM32H7RSWorkShop-Debug_authentication\1-Debug_authentication\dbg_auth_pubkey.pem`
- - In debug authentication update `Certificate path`, thanks `Browse...` to set it to your installation path
-- `...STM32H7RSWorkShop-Debug_authentication\1-Debug_authentication\dbg_auth_chain.EcdsaP256 `
-### WARNING : the Key/ Certificate path should avoid space character !
--  Click on Debug
+- In debug authentication update `Key path`, thanks `Browse...`
+- set it to your installation path  `...STM32H7RSWorkShop-Debug_authentication\1-Debug_authentication\dbg_auth_pubkey.pem`
+ - In debug authentication update `Certificate path`, thanks `Browse...`
+ - Set it to your installation path
+`...STM32H7RSWorkShop-Debug_authentication\1-Debug_authentication\dbg_auth_chain.EcdsaP256 `
+### WARNING : the Key/ Certificate path should not contain any space character !
   ![Debug config ](./img/update_key_path.gif)
+-  Click on Debug
 - Please break and then you can debug your application
   ![Debug config ](./img/debug_on_goin.gif)
 
@@ -84,11 +85,14 @@ The device is closed and our LED is blinking ! Device is ready to go on the fiel
   - Click on `Close Debug`
   - On the message pop-up : `Target successfully locked`, click `OK`
     ![Debug config ](./img/1rts_Discover.gif)
+
   - Click on `Discover`
-  - Update `Key File path`, thanks `Browse...` to set it to your installation path
- - `...STM32H7RSWorkShop-Debug_authentication\1-Debug_authentication\dbg_auth_pubkey.pem`
-  - Update `Certificate path`, thanks `Browse...` to set it to your installation path
-  - `...STM32H7RSWorkShop-Debug_authentication\1-Debug_authentication\dbg_auth_chain.EcdsaP256 `
+  - Update `Key File path`, thanks `Browse...`
+  - Set it to your installation path
+  `...STM32H7RSWorkShop-Debug_authentication\1-Debug_authentication\dbg_auth_pubkey.pem`
+  - Update `Certificate path`, thanks `Browse...`
+  - set it to your installation path
+  `...STM32H7RSWorkShop-Debug_authentication\1-Debug_authentication\dbg_auth_chain.EcdsaP256 `
   - Click on `Continue`
       ![Debug config ](./img/check_reopen.gif)
   - Select `Full regression`
@@ -96,7 +100,7 @@ The device is closed and our LED is blinking ! Device is ready to go on the fiel
   - On the message pop-up : `Debug Authentication Sucess`, click `OK`
     ![Debug config ](./img/regression_done.gif)
    - Select icon for the option byte `OB`
-   - Select `Product State` 
+   - Select `Product State` and check the value is `39` Open state
     ![Debug config ](./img/check_reopen.gif)    
 
 
